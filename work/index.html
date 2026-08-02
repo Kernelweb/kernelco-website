@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Kernel Co.</title>
+<meta name="description" content="Selected work by Kernel Co. — an interactive 3D earthworks model of the SKETR Zone 3 landfill extension, covering cut and fill, base formation, bundwalls, and the basal lining system.">
+<meta property="og:title" content="Work — Kernel Co.">
+<meta property="og:description" content="Selected work by Kernel Co. — an interactive 3D earthworks model of the SKETR Zone 3 landfill extension.">
+<meta property="og:image" content="https://www.kernelco.org/assets/SKETR_Zone3_Landfill_3D_View_SW.png">
+<meta property="og:url" content="https://www.kernelco.org/work/">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  .page-head { padding: 160px 0 0; }
+  .project { padding: 56px 0 96px; }
+  .project .context {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 14px;
+  }
+  .project h3 {
+    font-family: var(--serif); font-weight: normal;
+    font-size: clamp(22px, 2.8vw, 30px); color: var(--paper);
+    margin-bottom: 18px; letter-spacing: 0.3px;
+  }
+  .project p { color: var(--stone); margin-bottom: 16px; max-width: 760px; }
+  .model-embed {
+    position: relative; width: 100%;
+    height: min(78vh, 760px); min-height: 480px;
+    margin: 34px 0 12px;
+    border: 1px solid rgba(182,141,76,0.35);
+    background: #101216 url('/assets/SKETR_Zone3_Landfill_3D_View_SW.png') center / cover no-repeat;
+  }
+  .model-embed iframe {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; border: 0; display: block;
+  }
+  .model-loading {
+    position: absolute; left: 12px; bottom: 12px;
+    font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--stone); background: rgba(21,21,21,0.75);
+    padding: 6px 12px;
+  }
+  .model-caption { font-size: 13.5px; color: var(--stone); max-width: 760px; }
+  .model-caption a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(182,141,76,0.5); }
+  .model-caption a:hover { color: var(--paper); border-color: var(--paper); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="/"><img src="/assets/kernel-logo.png" alt="Kernel Co."></a>
+    <nav>
+      <a href="/#about">About</a>
+      <a href="/#services">Services</a>
+      <a href="/work/">Work</a>
+      <a href="/#learning">Kernel Learning</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-head">
+  <div class="wrap">
+    <div class="rule"></div>
+    <h2>Selected work</h2>
+    <p class="muted">Work is documented as it is delivered — models, registers, and review records that clients can open and inspect.</p>
+  </div>
+</section>
+
+<section class="project">
+  <div class="wrap">
+    <div class="context">KOC · SKETR Project · Zone 3</div>
+    <h3>SKETR Zone 3 Landfill Extension — 3D Earthworks Model</h3>
+    <p>An interactive WebGL model of the landfill extension earthworks. It layers the natural ground surface from the pre-topographic survey (EL 71.49–73.50 m), the cut and fill areas measured against NGL, the 500 mm gatch base formation layer, the new bundwall on three sides alongside the existing bundwall on the NE side with volumes tabulated per 250 mm level lift, the geosynthetics anchor trench, roads, ramps and platform, and the DAL-253 Rev B basal lining system.</p>
+    <p>The viewer is interactive — orbit the model, adjust the vertical exaggeration, toggle each layer's display, and probe levels at any point on the surface.</p>
+
+    <div class="model-embed" id="model-embed">
+      <div class="model-loading" id="model-loading">Loading 3D model — 5.8 MB</div>
+      <iframe id="model-iframe"
+              data-src="/work/models/sketr-zone3-landfill.html"
+              title="SKETR Zone 3 Landfill — interactive 3D earthworks model"
+              loading="lazy"
+              allowfullscreen></iframe>
+      <noscript>
+        <p style="position:absolute; left:12px; top:12px; color:#D8D1C4;">
+          The embedded viewer requires JavaScript.
+          <a href="/work/models/sketr-zone3-landfill.html" style="color:#B68D4C;">Open the 3D model directly</a>.
+        </p>
+      </noscript>
+    </div>
+    <p class="model-caption">
+      <a href="/work/models/sketr-zone3-landfill.html">Open full screen</a> — the viewer's controls
+      benefit from the whole window. The model requires a browser with WebGL2; on devices without it,
+      the viewer shows a notice instead of the model.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Kernel Co<span class="dot">.</span> All rights reserved</p>
+</footer>
+
+<script>
+(function () {
+  var frame = document.getElementById('model-iframe');
+  var container = document.getElementById('model-embed');
+  function load() {
+    if (!frame.src) { frame.src = frame.dataset.src; }
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) { load(); io.disconnect(); break; }
+      }
+    }, { rootMargin: '200px' });
+    io.observe(container);
+  } else {
+    load();
+  }
+})();
+</script>
+
+</body>
+</html>
